@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
 
-function App() {
+const App = () => {
+  const [bad,setBad]=useState(["knife","gun","kill","death"])
+  const [text,setText] = useState("")
+  const [show,setShow] = useState("")
+  const [check,setCheck] = useState(false)
+
+  const sbmt=()=>{
+   for(let i=0; i<bad.length;i++){
+    if(text.toLowerCase().includes(bad[i])){
+      setCheck(true)
+    }
+   }
+  if(check){
+    setShow("you are bad man")
+   }else{
+    setShow("you are good go")
+ }
+   setText("")
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+     {bad.map((vlu)=>(
+   
+     <div> <p>{vlu}</p></div>
+    ))}
+
+    <div>
+      <input placeholder='text here' onChange={(e)=>setText(e.target.value)}  />
+      <button onClick={sbmt}>submit</button>
+
+      <h1>{show}</h1>
     </div>
-  );
+    </div>
+  )
 }
 
-export default App;
+export default App
